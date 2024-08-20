@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     while (1) { // 클라이언트에게 지속적인 서비스를 제공하기 위한 무한루프
         clientlen = sizeof(struct sockaddr_storage); // 모든 종류의 구조체를 담을 수 있을 만큼 큰 sockaddr_storage 구조체의 크기를 저장
         connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // 클라이언트로부터 연결 요청을 기다린다. clientaddr에 연결된 클라이언트의 주소가 저장됨, 연결을 위한 새로운 연결 식별자가 반환되어 connfd에 저장됨
-        Getnameinfo((SA *) &clientaddr, clientlen, client_hostname, MAXLINE, client_port, MAXLINE, 0); // 클라이언트의 주소 정보 구조체를 클라이언트의 호스트 이름과 포트 번호로 변환해 각각 cleint_hostname, client_port에 저장
+        Getnameinfo((SA *) &clientaddr, clientlen, client_hostname, MAXLINE, client_port, MAXLINE, 0); // 클라이언트의 주소 정보 구조체를 클라이언트의 호스트 이름과 포트 번호로 변환해 각각 client_hostname, client_port에 저장
         printf("Connected to (%s, %s)\n", client_hostname, client_port); // 연결된 클라이언트의 정보(호스트 이름, 포트 번호) 출력
         echo(connfd); // ehco 서비스 제공
         Close(connfd); // 연결 식별자 닫음
